@@ -1,17 +1,17 @@
-const roles = [
-  "Automation Framework Engineer",
-  "CI/CD Quality Specialist",
-  "Test Platform Builder",
-  "Reliability-Focused SDET"
-];
+const sections = document.querySelectorAll(".section");
 
-let index = 0;
-const rotateEl = document.getElementById("rotate");
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = 1;
+      entry.target.style.transform = "translateY(0)";
+    }
+  });
+});
 
-function rotateText() {
-  rotateEl.textContent = roles[index];
-  index = (index + 1) % roles.length;
-}
-
-rotateText();
-setInterval(rotateText, 2000);
+sections.forEach(sec => {
+  sec.style.opacity = 0;
+  sec.style.transform = "translateY(40px)";
+  sec.style.transition = "all 1s ease";
+  observer.observe(sec);
+});
